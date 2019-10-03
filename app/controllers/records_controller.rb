@@ -29,7 +29,6 @@ class RecordsController < ApplicationController
 
   def update
     @record = Record.find(params[:id])
-
     if @record.update(record_params)
       flash[:success] = '日記は更新されました'
       redirect_to @record
