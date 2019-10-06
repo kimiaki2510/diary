@@ -1,6 +1,10 @@
 class RecordsController < ApplicationController
+  before_action :require_user_logged_in
+  before_action :set_record, only: [:show, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :show, :destroy]
+
   def index
-    @records = Record.all
+    @records = current_user.records
   end
 
   def show
@@ -24,11 +28,11 @@ class RecordsController < ApplicationController
   end
 
   def edit
-    @record = Record.find(params[:id])
+    set_record
   end
 
   def update
-    @record = Record.find(params[:id])
+    set_record
     if @record.update(record_params)
       flash[:success] = '日記は更新されました'
       redirect_to @record
@@ -39,10 +43,26 @@ class RecordsController < ApplicationController
   end
 
   def destroy
-    @record = Record.find(params[:id])
+    set_record
     @record.destroy
-
     flash[:success] = '日記は削除されました'
     redirect_to root_url
+  end
+
+  private
+
+  def set_record
+    @record =  Record.find(params[:id])
+  end
+
+  def record_params
+    params.require(:record).permit(:title, :content)
+  end
+
+  def correct_user
+    @record = current_user.records.find_by(id: params[:id])
+    unless @records
+      redirect_to root_url
+    end
   end
 end
