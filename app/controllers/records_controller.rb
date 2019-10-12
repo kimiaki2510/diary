@@ -1,14 +1,22 @@
 class RecordsController < ApplicationController
   before_action :require_user_logged_in
   before_action :set_record, only: [:show, :edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update, :show, :destroy]
+  #before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @records = current_user.records
+    @record = current_user.records
+    if logged_in?
+      @record = current_user.records.build  #form_with用
+      @records = current_user.records.order(id: :desc).page(params[:page])
+    end
   end
 
   def show
-    @record = Record.find(params[:id])
+    if current_user == @record.user
+      set_record
+    else
+      redirect_to root_url
+    end
   end
 
   def new
@@ -16,12 +24,13 @@ class RecordsController < ApplicationController
   end
 
   def create
-    @record = Record.new(record_params)
+    @record = current_user.records.build(record_params)
 
     if @record.save
       flash[:success] = '日記が正常に投稿されました'
       redirect_to @record
     else
+      @records = current_user.records.order(id: :desc).page(params[:page])
       flash.now[:danger] = '日記が正常に投稿されませんでした'
       render :new
     end
@@ -55,6 +64,7 @@ class RecordsController < ApplicationController
     @record =  Record.find(params[:id])
   end
 
+#Strong Parameter(セキュリティパラメータ)送信されたデータをフィルタリング
   def record_params
     params.require(:record).permit(:title, :content)
   end

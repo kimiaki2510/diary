@@ -10,3 +10,7 @@
   <%= f.submit '投稿' %>
 <%= end %>
 <%= link_to '一覧に戻る', records_path %>
+
+<h1>日記編集</h1>
+<%= render 'form', record: @record %>
+<%= link_to '戻る', record_path %>

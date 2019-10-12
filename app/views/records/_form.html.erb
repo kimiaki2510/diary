@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-6">
+    <%= form_with(model: record, local: true)do |f| %>
+      <div id="errors_explanation" class="alart alart-warning">
+        <ul class="mb-0">
+          <% record.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+
+    <div class="form-group">
+      <%= f.label :title, 'タイトル' %>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :content, '内容'%>
+      <%= f.text_area :content, class: 'form-control', rows: 5 %>
+    </div>
+      <%= f.submit '投稿', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
