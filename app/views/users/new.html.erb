@@ -1,11 +1,11 @@
-<div class="text-center">
-  <h1>新規登録</h1>
-</div>
-
+<div class="body">
+  <div class="text-center">
+    <h1>新規登録</h1>
+  </div>
 <div class="row">
   <div class="col-sm-6 offset-sm-3">
-    <%= form_with(model: @user, local: true)do |f| %>
-    <%= render 'layouts/error_records', model: f.object %>
+    <%= form_with(model: @user, local: true) do |f| %>
+
       <div class="form-group">
         <%= f.label :name, '名前' %>
         <%= f.text_field :name, class: 'form-control' %>
@@ -22,7 +22,8 @@
         <%= f.label :password_confirmation, '確認用パスワード'%>
         <%= f.password_field :password_confirmation, class: 'form-control'%>
       </div>
-      <%= f.submit 'サインアップ', class: 'btn btn-primary btn-block'%>
+      <%= f.submit '登録する', class: 'btn btn-primary btn-block'%>
     <% end %>
   </div>
+</div>
 </div>

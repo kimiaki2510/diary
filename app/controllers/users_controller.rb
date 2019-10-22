@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     flash[:success] = 'ユーザは退会されました'
-    redirect_to users_url
+    redirect_to user_url
   end
 
   private

@@ -9,7 +9,9 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportContent">
           <ul class="navbar-nav">
             <% if logged_in? %>
-              <li class="dropdown-item"><%= link_to 'My profile', user_path(current_user) %></li>
+              <%= link_to user_path(current_user) do %>
+                <i class="fas fa-user h3"></i>
+              <% end %>
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
                 <ul class="dropdown-menu dropdown-menu-right">

@@ -4,7 +4,6 @@ class RecordsController < ApplicationController
   #before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @record = current_user.records
     if logged_in?
       @record = current_user.records.build  #form_with用
       @records = current_user.records.order(id: :desc).page(params[:page])
@@ -25,10 +24,9 @@ class RecordsController < ApplicationController
 
   def create
     @record = current_user.records.build(record_params)
-
     if @record.save
       flash[:success] = '日記が正常に投稿されました'
-      redirect_to @record
+      redirect_to root_url
     else
       @records = current_user.records.order(id: :desc).page(params[:page])
       flash.now[:danger] = '日記が正常に投稿されませんでした'

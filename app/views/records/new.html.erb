@@ -1,3 +1,5 @@
 <h1>日記作成ページ</h1>
 <%= render 'form', record: @record %>
-<%= link_to '一覧に戻る', records_path %>
+<%= link_to root_url do%>
+  <i class="fas fa-undo-alt"></i>
+<% end %>

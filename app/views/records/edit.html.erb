@@ -1,16 +1,10 @@
 <h1>id: <%= @record.id %> : <%= @record.title %>の日記編集ページ</h1>
 
 <%= form_with(model: @record, local: true ) do |f| %>
-  <%= f.label :title, 'タイトル'%>
-  <%= f.text_field :title %>
-
-  <%= f.label :content, '内容'%>
-  <%= f.text_field :content %>
-
-  <%= f.submit '投稿' %>
-<%= end %>
-<%= link_to '一覧に戻る', records_path %>
+<% end %>
 
 <h1>日記編集</h1>
 <%= render 'form', record: @record %>
-<%= link_to '戻る', record_path %>
+<%= link_to record_path do%>
+  <i class="fas fa-undo-alt"></i>
+<% end %>
