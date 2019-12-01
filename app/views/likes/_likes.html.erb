@@ -1,0 +1,10 @@
+<% if Like.find_by(user_id: current_user.id, record_id: record.id)%>
+  <%= link_to "/likes/:record_id/create", method: :delete, remote: true do %>
+    <i class="material-icons">star</i>
+  <% end %>
+<% else %>
+  <%= link_to"/likes/:record_id/delete", method: :post, remote: true do%>
+    <i class="material-icons">star_border</i>
+  <% end %>
+<% end %>
+<%= record.likes.length %>

@@ -1,1 +1,7 @@
 <%= render 'users', users: @users%>
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.id %></td>
+    <td><%= user.name %></td>
+  </tr>
+<% end %>

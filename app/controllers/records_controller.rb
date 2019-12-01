@@ -6,7 +6,7 @@ class RecordsController < ApplicationController
   def index
     if logged_in?
       @record = current_user.records.build  #form_with用
-      @records = current_user.records.order(id: :desc).page(params[:page])
+      @records = current_user.feed_records.order(id: :desc).page(params[:page])
     end
   end
 
@@ -30,7 +30,7 @@ class RecordsController < ApplicationController
     else
       @records = current_user.records.order(id: :desc).page(params[:page])
       flash.now[:danger] = '日記が正常に投稿されませんでした'
-      render :new
+      render 'records/index'
     end
   end
 

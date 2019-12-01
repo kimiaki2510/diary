@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:index, :show]
 
   def index
-    @users = User.order(id: :desc).page(params[:page].per(25))
+    #@users = User.order(id: :desc).page(params[:page].per(25))
+    @users = User.all
   end
 
   def show
@@ -31,7 +32,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = 'ユーザ変更がされました'
     else
@@ -45,6 +45,18 @@ class UsersController < ApplicationController
     @user.destroy
     flash[:success] = 'ユーザは退会されました'
     redirect_to user_url
+  end
+
+  def followings
+    @user = User.find(params[:id])
+    @followings = @user.followings.page(params[:page])
+    counts(@user)
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.followers.page(params[:page])
+    counts(@user)
   end
 
   private
