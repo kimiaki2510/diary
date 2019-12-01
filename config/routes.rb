@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       get :followings
       get :followers
     end
+    collection do
+      get :search
+    end
   end
   post "likes/:record_id/create", to: "likes#create", constraints: {record_id: /\d+/}, as: :likes_create
   post "likes/:record_id/delete", to: "likes#delete", constraints: {record_id: /\d+/}, as: :likes_delete

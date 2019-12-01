@@ -5,7 +5,7 @@
       <%= f.submit 'フォロー解除', class: 'btn btn-default btn-block' %>
     <% end %>
   <% else %>
-    <%= form_with(model: current_user.relationships.build, local: true)do |f|%>
+    <%= form_with(model: current_user.relationships.build, local: true)do |f| %>
       <%= f.submit 'フォローする', class: 'btn btn-primary btn-block' %>
     <% end %>
   <% end %>
